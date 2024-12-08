@@ -1,6 +1,6 @@
 #include "OrderBook.h"
 
-bool OrderBook::matchOrders(const std::string& symbol) {
+void OrderBook::matchOrders(const std::string& symbol) {
     std::unique_lock<std::shared_mutex> lock(mutex_);
 
     auto& orderContainer = symbolOrderBooks_[symbol];
@@ -26,11 +26,9 @@ bool OrderBook::matchOrders(const std::string& symbol) {
             break;
         }
     }
-
-    return false;
 }
 
-bool OrderBook::addOrder(const Order& order) {
+void OrderBook::addOrder(const Order& order) {
     std::unique_lock<std::shared_mutex> lock(mutex_);
 
     auto& orderContainer = symbolOrderBooks_[order.symbol];
@@ -40,8 +38,6 @@ bool OrderBook::addOrder(const Order& order) {
         orderContainer.sellOrders.insert({order.price, order});
     }
     orderById_[order.id] = order;
-
-    return true;
 }
 
 bool OrderBook::cancelOrder(const std::string& orderId) {

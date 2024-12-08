@@ -13,10 +13,9 @@
 
 class OrderBook {
    public:
-    // true: can self cross; false: not enough to self cross
-    bool matchOrders(const std::string& symbol);
+    void matchOrders(const std::string& symbol);
 
-    bool addOrder(const Order& order);
+    void addOrder(const Order& order);
 
     bool cancelOrder(const std::string& orderId);
 
