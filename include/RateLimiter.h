@@ -5,7 +5,7 @@
 #include <queue>
 
 class RateLimiter {
-   public:
+  public:
     RateLimiter(size_t maxRequests, std::chrono::milliseconds interval)
         : MAX_REQUESTS(maxRequests), RATE_LIMIT_INTERVAL(interval) {}
 
@@ -15,9 +15,9 @@ class RateLimiter {
 
     virtual void reset() = 0;
 
-   protected:
+  protected:
     const size_t MAX_REQUESTS;
     const std::chrono::milliseconds RATE_LIMIT_INTERVAL;
 };
 
-#endif  // RATELIMETER_H
+#endif // RATELIMETER_H

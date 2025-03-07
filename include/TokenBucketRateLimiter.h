@@ -11,14 +11,14 @@
 #include "RateLimiter.h"
 
 class TokenBucketRateLimiter : public RateLimiter {
-   public:
+  public:
     TokenBucketRateLimiter(size_t maxRequests = 10, std::chrono::milliseconds interval = std::chrono::seconds(1));
 
     bool checkRequestRate() override;
 
     void reset() override;
 
-   private:
+  private:
     bool tryAddRequest(size_t currentBucket);
 
     void rotateBuckets(int64_t nowMs);
@@ -31,4 +31,4 @@ class TokenBucketRateLimiter : public RateLimiter {
     std::mutex resetMutex_;
 };
 
-#endif  // TOKENBUCKETRATELIMITER_H
+#endif // TOKENBUCKETRATELIMITER_H

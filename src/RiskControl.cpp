@@ -31,11 +31,11 @@ std::unique_ptr<RateLimiter> RiskControl::createRateLimiter(RateLimiterType rate
                                                             size_t maxRequestsPerInterval,
                                                             std::chrono::milliseconds interval) {
     switch (rateLimiterType) {
-        case RateLimiterType::FixedWindow:
-            return std::make_unique<FixedWindowRateLimiter>(maxRequestsPerInterval, interval);
-        case RateLimiterType::TokenBucket:
-            return std::make_unique<TokenBucketRateLimiter>(maxRequestsPerInterval, interval);
-        default:
-            throw std::invalid_argument("Unknown RateLimiter type");
+    case RateLimiterType::FixedWindow:
+        return std::make_unique<FixedWindowRateLimiter>(maxRequestsPerInterval, interval);
+    case RateLimiterType::TokenBucket:
+        return std::make_unique<TokenBucketRateLimiter>(maxRequestsPerInterval, interval);
+    default:
+        throw std::invalid_argument("Unknown RateLimiter type");
     }
 }

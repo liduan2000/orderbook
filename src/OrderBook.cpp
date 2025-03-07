@@ -44,9 +44,7 @@ bool OrderBook::cancelOrder(const std::string& orderId) {
     std::unique_lock<std::shared_mutex> lock(mutex_);
 
     auto orderIt = orderById_.find(orderId);
-    if (orderIt == orderById_.end()) {
-        return false;
-    }
+    if (orderIt == orderById_.end()) { return false; }
 
     Order& order = orderIt->second;
     auto& orderContainer = symbolOrderBooks_[order.symbol];
@@ -77,17 +75,13 @@ bool OrderBook::modifyOrderQuantity(const std::string& orderId, size_t newQuanti
     std::unique_lock<std::shared_mutex> lock(mutex_);
 
     auto orderIt = orderById_.find(orderId);
-    if (orderIt == orderById_.end()) {
-        return false;
-    }
+    if (orderIt == orderById_.end()) { return false; }
 
     Order& order = orderIt->second;
     order.qty = newQuantity;
 
     // if quantity is 0, cancel order
-    if (newQuantity == 0) {
-        return cancelOrder(orderId);
-    }
+    if (newQuantity == 0) { return cancelOrder(orderId); }
 
     return true;
 }
@@ -97,21 +91,15 @@ std::vector<Order> OrderBook::getOrdersForSymbol(const std::string& symbol, bool
 
     std::vector<Order> orders;
     auto it = symbolOrderBooks_.find(symbol);
-    if (it == symbolOrderBooks_.end()) {
-        return orders;
-    }
+    if (it == symbolOrderBooks_.end()) { return orders; }
 
     const auto& orderContainer = it->second;
     if (isBuy) {
         const auto& targetOrders = orderContainer.buyOrders;
-        for (const auto& orderPair : targetOrders) {
-            orders.push_back(orderPair.second);
-        }
+        for (const auto& orderPair : targetOrders) { orders.push_back(orderPair.second); }
     } else {
         const auto& targetOrders = orderContainer.sellOrders;
-        for (const auto& orderPair : targetOrders) {
-            orders.push_back(orderPair.second);
-        }
+        for (const auto& orderPair : targetOrders) { orders.push_back(orderPair.second); }
     }
 
     return orders;
@@ -120,9 +108,7 @@ std::vector<Order> OrderBook::getOrdersForSymbol(const std::string& symbol, bool
 std::pair<double, double> OrderBook::getBestPrices(const std::string& symbol) const {
     std::shared_lock<std::shared_mutex> lock(mutex_);
     auto it = symbolOrderBooks_.find(symbol);
-    if (it == symbolOrderBooks_.end()) {
-        return {0.0, 0.0};
-    }
+    if (it == symbolOrderBooks_.end()) { return {0.0, 0.0}; }
     const auto& orderContainer = symbolOrderBooks_.at(symbol);
     double bestBidPrice = orderContainer.buyOrders.empty() ? 0.0 : orderContainer.buyOrders.begin()->first;
     double bestAskPrice = orderContainer.sellOrders.empty() ? 0.0 : orderContainer.sellOrders.begin()->first;
@@ -134,22 +120,16 @@ size_t OrderBook::getTotalOrderVolume(const std::string& symbol, bool isBuy) con
     std::shared_lock<std::shared_mutex> lock(mutex_);
 
     auto it = symbolOrderBooks_.find(symbol);
-    if (it == symbolOrderBooks_.end()) {
-        return 0;
-    }
+    if (it == symbolOrderBooks_.end()) { return 0; }
 
     const auto& orderContainer = it->second;
     size_t totalVolume = 0;
     if (isBuy) {
         const auto& targetOrders = orderContainer.buyOrders;
-        for (const auto& orderPair : targetOrders) {
-            totalVolume += orderPair.second.qty;
-        }
+        for (const auto& orderPair : targetOrders) { totalVolume += orderPair.second.qty; }
     } else {
         const auto& targetOrders = orderContainer.sellOrders;
-        for (const auto& orderPair : targetOrders) {
-            totalVolume += orderPair.second.qty;
-        }
+        for (const auto& orderPair : targetOrders) { totalVolume += orderPair.second.qty; }
     }
 
     return totalVolume;
