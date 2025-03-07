@@ -12,7 +12,7 @@
 #include "Order.h"
 
 class OrderBook {
-   public:
+  public:
     void matchOrders(const std::string& symbol);
 
     void addOrder(const Order& order);
@@ -27,14 +27,14 @@ class OrderBook {
 
     size_t getTotalOrderVolume(const std::string& symbol, bool isBuy) const;
 
-   private:
+  private:
     struct OrderContainer {
-        std::multimap<double, Order, std::greater<double>> buyOrders;  // buyOrders desc
-        std::multimap<double, Order> sellOrders;                       // sellOrders asc
+        std::multimap<double, Order, std::greater<double>> buyOrders; // buyOrders desc
+        std::multimap<double, Order> sellOrders;                      // sellOrders asc
     };
     // read-write lock
     mutable std::shared_mutex mutex_;
     std::unordered_map<std::string, OrderContainer> symbolOrderBooks_;
     std::unordered_map<std::string, Order> orderById_;
 };
-#endif  // ORDERBOOK_H
+#endif // ORDERBOOK_H

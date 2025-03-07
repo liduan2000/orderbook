@@ -5,7 +5,7 @@
 #include "SelfCrossChecker.h"
 
 class RiskControl {
-   public:
+  public:
     enum class RateLimiterType { FixedWindow, TokenBucket };
 
     RiskControl(OrderBook& orderBook, RateLimiterType rateLimiterType = RateLimiterType::FixedWindow,
@@ -13,7 +13,7 @@ class RiskControl {
 
     bool approveNewOrder(const Order* ord, std::string& rejectReason);
 
-   private:
+  private:
     SelfCrossChecker selfCrossChecker_;
     std::unique_ptr<RateLimiter> rateLimiter_;
 
@@ -21,4 +21,4 @@ class RiskControl {
                                                    std::chrono::milliseconds interval);
 };
 
-#endif  // RISKCONTROL_H
+#endif // RISKCONTROL_H

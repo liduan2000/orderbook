@@ -4,13 +4,13 @@
 #include "OrderBook.h"
 
 class SelfCrossChecker {
-   public:
+  public:
     SelfCrossChecker(OrderBook& orderBook);
 
     bool checkSelfCross(const Order* newOrder);
 
-   private:
+  private:
     OrderBook& orderBook_;
 };
 
-#endif  // SELFCROSSCHECKER_H
+#endif // SELFCROSSCHECKER_H

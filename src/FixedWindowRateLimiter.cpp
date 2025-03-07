@@ -13,9 +13,7 @@ bool FixedWindowRateLimiter::checkRequestRate() {
     while (!requestTimestamps_.empty() && (now - requestTimestamps_.front()) > RATE_LIMIT_INTERVAL) {
         requestTimestamps_.pop();
     }
-    if (requestTimestamps_.size() >= MAX_REQUESTS) {
-        return false;
-    }
+    if (requestTimestamps_.size() >= MAX_REQUESTS) { return false; }
 
     requestTimestamps_.push(now);
     return true;

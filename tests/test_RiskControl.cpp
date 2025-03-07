@@ -8,7 +8,7 @@
 
 // Comprehensive Test Suite
 class OrderBookTest {
-   public:
+  public:
     static void runAllTests() {
         testBasicOrderPlacement();
         testSelfCrossDetection();
@@ -28,7 +28,7 @@ class OrderBookTest {
         std::cout << "You can go and have a good sleep:)" << std::endl;
     }
 
-   private:
+  private:
     // Test basic order placement
     static void testBasicOrderPlacement() {
         OrderBook orderBook;
@@ -63,8 +63,8 @@ class OrderBookTest {
 
         Order buyOrder1("1", "AAPL", 150.0, 100, true);
         Order sellOrder1("2", "AAPL", 151.0, 100, false);
-        Order buyOrder2("3", "AAPL", 151.5, 100, true);    // Self-cross
-        Order sellOrder2("4", "AAPL", 149.5, 100, false);  // Self-cross
+        Order buyOrder2("3", "AAPL", 151.5, 100, true);   // Self-cross
+        Order sellOrder2("4", "AAPL", 149.5, 100, false); // Self-cross
 
         std::string rejectReason;
         bool approved = riskControl.approveNewOrder(&buyOrder1, rejectReason);
@@ -92,7 +92,7 @@ class OrderBookTest {
     static void testRequestRateLimit(RiskControl::RateLimiterType ratelimiterType) {
         OrderBook orderBook;
         RiskControl riskControl(orderBook, ratelimiterType, 5,
-                                std::chrono::milliseconds(1000));  // 10 requests per second
+                                std::chrono::milliseconds(1000)); // 10 requests per second
         // Place 3 orders quickly
         std::string rejectReason;
         for (int i = 0; i < 5; i++) {
@@ -132,13 +132,13 @@ class OrderBookTest {
     static void testSelfCrossAndRateLimit(RiskControl::RateLimiterType ratelimiterType) {
         OrderBook orderBook;
         RiskControl riskControl(orderBook, ratelimiterType, 3,
-                                std::chrono::milliseconds(1000));  // 3 requests per second
+                                std::chrono::milliseconds(1000)); // 3 requests per second
 
         Order buyOrder1("1", "AAPL", 150.0, 100, true);
         Order sellOrder1("2", "AAPL", 151.0, 100, false);
         Order buyOrder2("3", "AAPL", 149.0, 100, true);
         Order buyOrder3("4", "AAPL", 148.0, 100, true);
-        Order sellOrder2("5", "AAPL", 149.5, 100, false);  // Self-cross
+        Order sellOrder2("5", "AAPL", 149.5, 100, false); // Self-cross
 
         std::string rejectReason;
         bool approved = riskControl.approveNewOrder(&buyOrder1, rejectReason);
@@ -178,7 +178,7 @@ class OrderBookTest {
                                                          int numThreads = 100, int requestsPerThread = 1) {
         OrderBook orderBook;
         RiskControl riskControl(orderBook, ratelimiterType, 10,
-                                std::chrono::milliseconds(1000));  // 10 req per second
+                                std::chrono::milliseconds(1000)); // 10 req per second
 
         std::vector<std::thread> threads;
         std::atomic<int> successCount(0);
@@ -203,9 +203,7 @@ class OrderBookTest {
             });
         }
 
-        for (auto& thread : threads) {
-            thread.join();
-        }
+        for (auto& thread : threads) { thread.join(); }
 
         // assert requests
         int totalOrders = successCount + rejectCount;

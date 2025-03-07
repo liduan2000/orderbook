@@ -8,7 +8,7 @@ struct Order {
     std::string symbol;
     double price;
     double qty;
-    bool isBuy;  // true -> buy, false -> sell
+    bool isBuy; // true -> buy, false -> sell
 
     Order() = default;
     Order(const std::string& orderId, const std::string& orderSymbol, double orderPrice, double orderQty,
@@ -16,4 +16,4 @@ struct Order {
         : id(orderId), symbol(orderSymbol), price(orderPrice), qty(orderQty), isBuy(orderIsBuy) {}
 };
 
-#endif  // ORDER_H
+#endif // ORDER_H

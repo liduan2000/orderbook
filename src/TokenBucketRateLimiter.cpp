@@ -2,12 +2,8 @@
 
 TokenBucketRateLimiter::TokenBucketRateLimiter(size_t maxRequests, std::chrono::milliseconds interval)
     : RateLimiter(maxRequests, interval) {
-    if (maxRequests == 0) {
-        throw std::invalid_argument("Max requests must be greater than 0");
-    }
-    if (interval.count() <= 0) {
-        throw std::invalid_argument("Interval must be greater than 0 milliseconds");
-    }
+    if (maxRequests == 0) { throw std::invalid_argument("Max requests must be greater than 0"); }
+    if (interval.count() <= 0) { throw std::invalid_argument("Interval must be greater than 0 milliseconds"); }
 
     bucketWidthMs_ = std::max(static_cast<size_t>(RATE_LIMIT_INTERVAL.count() / 10), static_cast<size_t>(1));
     bucketCount_ = static_cast<size_t>(std::ceil(static_cast<double>(RATE_LIMIT_INTERVAL.count()) / bucketWidthMs_));
@@ -27,9 +23,7 @@ bool TokenBucketRateLimiter::checkRequestRate() {
 bool TokenBucketRateLimiter::tryAddRequest(size_t currentBucket) {
     const int maxSpins = 100;
     int spinCount = 0;
-    if (totalRequests_.load(std::memory_order_relaxed) >= MAX_REQUESTS) {
-        return false;
-    }
+    if (totalRequests_.load(std::memory_order_relaxed) >= MAX_REQUESTS) { return false; }
 
     size_t expected = buckets_[currentBucket].load(std::memory_order_relaxed);
     while (!buckets_[currentBucket].compare_exchange_weak(expected, expected + 1, std::memory_order_acq_rel,
@@ -48,9 +42,7 @@ void TokenBucketRateLimiter::rotateBuckets(int64_t nowMs) {
     int64_t lastTime = lastRotateTime_.load(std::memory_order_relaxed);
     int64_t elapsed = nowMs - lastTime;
 
-    if (static_cast<size_t>(elapsed) < bucketWidthMs_) {
-        return;
-    }
+    if (static_cast<size_t>(elapsed) < bucketWidthMs_) { return; }
 
     if (lastRotateTime_.compare_exchange_strong(lastTime, nowMs, std::memory_order_acq_rel)) {
         size_t bucketsToClear = std::min(static_cast<size_t>(elapsed / bucketWidthMs_), bucketCount_);
@@ -69,9 +61,7 @@ void TokenBucketRateLimiter::rotateBuckets(int64_t nowMs) {
 void TokenBucketRateLimiter::reset() {
     std::lock_guard<std::mutex> lock(resetMutex_);
 
-    for (size_t i = 0; i < bucketCount_; ++i) {
-        buckets_[i].store(0, std::memory_order_relaxed);
-    }
+    for (size_t i = 0; i < bucketCount_; ++i) { buckets_[i].store(0, std::memory_order_relaxed); }
     totalRequests_.store(0, std::memory_order_relaxed);
     lastRotateTime_.store(
         std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch())
