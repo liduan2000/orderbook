@@ -4,11 +4,8 @@
 #include <atomic>
 #include <cmath>
 #include <mutex>
-#include <stdexcept>
-#include <thread>
-#include <vector>
 
-#include "RateLimiter.h"
+#include "rate_limiter.h"
 
 class TokenBucketRateLimiter : public RateLimiter {
   public:

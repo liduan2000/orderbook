@@ -1,4 +1,4 @@
-#include "SelfCrossChecker.h"
+#include "self_cross_checker.h"
 
 SelfCrossChecker::SelfCrossChecker(OrderBook& orderBook) : orderBook_(orderBook) {}
 

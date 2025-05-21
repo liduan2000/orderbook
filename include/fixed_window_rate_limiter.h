@@ -1,9 +1,10 @@
-#ifndef REQUESTRATELIMETER_H
-#define REQUESTRATELIMETER_H
+#ifndef FIXEDWINDOWRATELIMETER_H
+#define FIXEDWINDOWRATELIMETER_H
 
 #include <mutex>
+#include <queue>
 
-#include "RateLimiter.h"
+#include "rate_limiter.h"
 
 class FixedWindowRateLimiter : public RateLimiter {
   public:
@@ -18,4 +19,4 @@ class FixedWindowRateLimiter : public RateLimiter {
     std::queue<std::chrono::steady_clock::time_point> requestTimestamps_;
 };
 
-#endif // REQUESTRATELIMETER_H
+#endif // FIXEDWINDOWRATELIMETER_H

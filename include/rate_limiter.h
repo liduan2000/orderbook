@@ -2,7 +2,6 @@
 #define RATELIMETER_H
 
 #include <chrono>
-#include <queue>
 
 class RateLimiter {
   public:
