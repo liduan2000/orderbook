@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <thread>
 
-#include "token_bucket_rate_limiter.h"
+#include "token_bucket_rate_limiter.hpp"
 
 TokenBucketRateLimiter::TokenBucketRateLimiter(size_t maxRequests, std::chrono::milliseconds interval)
     : RateLimiter(maxRequests, interval) {

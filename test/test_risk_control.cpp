@@ -3,8 +3,8 @@
 #include <iostream>
 #include <thread>
 
-#include "orderbook.h"
-#include "risk_control.h"
+#include "orderbook.hpp"
+#include "risk_control.hpp"
 
 // Comprehensive Test Suite
 class OrderBookTest {

@@ -1,8 +1,7 @@
-#ifndef RISKCONTROL_H
-#define RISKCONTROL_H
+#pragma once
 
-#include "rate_limiter.h"
-#include "self_cross_checker.h"
+#include "rate_limiter.hpp"
+#include "self_cross_checker.hpp"
 
 class RiskControl {
   public:
@@ -20,5 +19,3 @@ class RiskControl {
     std::unique_ptr<RateLimiter> createRateLimiter(RateLimiterType rateLimiterType, size_t maxRequestsPerInterval,
                                                    std::chrono::milliseconds interval);
 };
-
-#endif // RISKCONTROL_H

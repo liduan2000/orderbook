@@ -1,10 +1,9 @@
-#ifndef FIXEDWINDOWRATELIMETER_H
-#define FIXEDWINDOWRATELIMETER_H
+#pragma once
 
 #include <mutex>
 #include <queue>
 
-#include "rate_limiter.h"
+#include "rate_limiter.hpp"
 
 class FixedWindowRateLimiter : public RateLimiter {
   public:
@@ -18,5 +17,3 @@ class FixedWindowRateLimiter : public RateLimiter {
     std::mutex requestRateMutex_;
     std::queue<std::chrono::steady_clock::time_point> requestTimestamps_;
 };
-
-#endif // FIXEDWINDOWRATELIMETER_H

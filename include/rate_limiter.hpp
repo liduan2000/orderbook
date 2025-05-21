@@ -1,5 +1,4 @@
-#ifndef RATELIMETER_H
-#define RATELIMETER_H
+#pragma once
 
 #include <chrono>
 
@@ -18,5 +17,3 @@ class RateLimiter {
     const size_t MAX_REQUESTS;
     const std::chrono::milliseconds RATE_LIMIT_INTERVAL;
 };
-
-#endif // RATELIMETER_H

@@ -1,12 +1,11 @@
-#ifndef ORDERBOOK_H
-#define ORDERBOOK_H
+#pragma once
 
 #include <map>
 #include <shared_mutex>
 #include <unordered_map>
 #include <vector>
 
-#include "order.h"
+#include "order.hpp"
 
 class OrderBook {
   public:
@@ -34,4 +33,3 @@ class OrderBook {
     std::unordered_map<std::string, OrderContainer> symbolOrderBooks_;
     std::unordered_map<std::string, Order> orderById_;
 };
-#endif // ORDERBOOK_H

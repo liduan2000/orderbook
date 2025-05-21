@@ -1,7 +1,6 @@
-#ifndef SELFCROSSCHECKER_H
-#define SELFCROSSCHECKER_H
+#pragma once
 
-#include "orderbook.h"
+#include "orderbook.hpp"
 
 class SelfCrossChecker {
   public:
@@ -12,5 +11,3 @@ class SelfCrossChecker {
   private:
     OrderBook& orderBook_;
 };
-
-#endif // SELFCROSSCHECKER_H

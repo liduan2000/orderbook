@@ -1,9 +1,9 @@
 #include <memory>
 #include <stdexcept>
 
-#include "fixed_window_rate_limiter.h"
-#include "risk_control.h"
-#include "token_bucket_rate_limiter.h"
+#include "fixed_window_rate_limiter.hpp"
+#include "risk_control.hpp"
+#include "token_bucket_rate_limiter.hpp"
 
 RiskControl::RiskControl(OrderBook& orderBook, RateLimiterType rateLimiterType, size_t maxRequests,
                          std::chrono::milliseconds interval)
