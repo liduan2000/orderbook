@@ -15,15 +15,14 @@
 
 # Getting Started
 
-## Make and Run Tests
+## Make
 
 ```
-make
-./test.exe
+./compile.sh
 ```
 
 ## Clean
 
 ```
-make clean
+rm -rf build
 ```
