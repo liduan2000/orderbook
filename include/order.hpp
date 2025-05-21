@@ -1,5 +1,4 @@
-#ifndef ORDER_H
-#define ORDER_H
+#pragma once
 
 #include <string>
 
@@ -15,5 +14,3 @@ struct Order {
           bool orderIsBuy)
         : id(orderId), symbol(orderSymbol), price(orderPrice), qty(orderQty), isBuy(orderIsBuy) {}
 };
-
-#endif // ORDER_H

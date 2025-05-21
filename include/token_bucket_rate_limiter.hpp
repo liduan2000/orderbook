@@ -1,11 +1,10 @@
-#ifndef TOKENBUCKETRATELIMITER_H
-#define TOKENBUCKETRATELIMITER_H
+#pragma once
 
 #include <atomic>
 #include <cmath>
 #include <mutex>
 
-#include "rate_limiter.h"
+#include "rate_limiter.hpp"
 
 class TokenBucketRateLimiter : public RateLimiter {
   public:
@@ -27,5 +26,3 @@ class TokenBucketRateLimiter : public RateLimiter {
     std::atomic<size_t> totalRequests_{0};
     std::mutex resetMutex_;
 };
-
-#endif // TOKENBUCKETRATELIMITER_H
