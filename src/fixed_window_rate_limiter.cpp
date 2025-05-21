@@ -7,9 +7,6 @@ bool FixedWindowRateLimiter::checkRequestRate() {
     std::lock_guard<std::mutex> lock(requestRateMutex_);
 
     auto now = std::chrono::steady_clock::now();
-    // std::cout << "Elapsed time: "
-    //           << std::chrono::duration_cast<std::chrono::milliseconds>(now - requestTimestamps_.front()).count()
-    //           << "ms, current window requests: " << requestTimestamps_.size() << std::endl;
     while (!requestTimestamps_.empty() && (now - requestTimestamps_.front()) > RATE_LIMIT_INTERVAL) {
         requestTimestamps_.pop();
     }
