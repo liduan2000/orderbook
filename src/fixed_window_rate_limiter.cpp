@@ -1,4 +1,4 @@
-#include "FixedWindowRateLimiter.h"
+#include "fixed_window_rate_limiter.h"
 
 FixedWindowRateLimiter::FixedWindowRateLimiter(size_t maxRequests, std::chrono::milliseconds interval)
     : RateLimiter(maxRequests, interval) {}

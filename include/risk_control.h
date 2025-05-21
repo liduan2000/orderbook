@@ -1,8 +1,8 @@
 #ifndef RISKCONTROL_H
 #define RISKCONTROL_H
 
-#include "RateLimiter.h"
-#include "SelfCrossChecker.h"
+#include "rate_limiter.h"
+#include "self_cross_checker.h"
 
 class RiskControl {
   public:

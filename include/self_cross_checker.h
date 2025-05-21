@@ -1,7 +1,7 @@
 #ifndef SELFCROSSCHECKER_H
 #define SELFCROSSCHECKER_H
 
-#include "OrderBook.h"
+#include "orderbook.h"
 
 class SelfCrossChecker {
   public:
