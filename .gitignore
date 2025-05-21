@@ -1,0 +1,7 @@
+build/
+CMakeCache.txt
+
+.idea/
+.vscode/
+.clangd
+.DS_Store
